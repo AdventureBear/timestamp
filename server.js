@@ -13,14 +13,23 @@ app.get('/:input', function( req, res){
   var validDateStr = dateFromString.isValid();
 
   console.log("Input is: ", input);
- 
+
   console.log("Valid Date from string?", validDateStr);
+
+  //if input string is a number, assume unix timestamp
+    if(!isNaN(input)){
+      console.log(input, "Looks like a number");
+
+
+      res.send("this looks like a number");
+
+    }
 
   //if it is an input containing natural language elements
   //try converting to a date format & display
     if (validDateStr) {
-      //returnObj = {'unix': dateFromString.unix(), 'date':dateFromString };
-      res.send(dateFromString);
+      returnObj = {'unix': dateFromString.unix(), 'date':dateFromString };
+      res.send(returnObj);
     } else {
       res.send("Input cannot form a valid date");
     }
