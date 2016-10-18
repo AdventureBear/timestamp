@@ -2,6 +2,7 @@
 // node.js  v0.12.0
 var express = require('express');
 var app = express();
+var cool = require('cool-ascii-faces');
 var port = 5000;
 
 var moment = require('moment');
@@ -10,6 +11,11 @@ moment().format();
 var returnObj = {};
 
 app.use(express.static('.'));
+
+app.get ('/cool', function(req, res){
+  res.send(cool());
+})
+
 
 app.get('/:input', function( req, res){
 
@@ -55,7 +61,7 @@ app.get('/:input', function( req, res){
   });
 
 app.listen(port, function () {
-  console.log('Timeserver microapp listening on port 8080!');
+  console.log('Timeserver microapp listening on port ' + port);
 });
 
 
