@@ -57,9 +57,6 @@ app.get('/:input', function( req, res){
 
     res.send('index.html');
 
-    //res.end( "<h2>API Basejump: Timestamp microservice</h2>" +
-    //  "<p>For more information visit this link <a href='https://timestamp-ms.herokuapp.com/'>link</a>" +
-    //  "</P>");P
   });
 
 
