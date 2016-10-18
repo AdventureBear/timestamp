@@ -3,13 +3,15 @@
 var express = require('express');
 var app = express();
 var cool = require('cool-ascii-faces');
-var port = 5000;
+//var port = 5000;
 
 var moment = require('moment');
 moment().format();
 
 var returnObj = {};
 
+
+app.set('port', (process.env.PORT || 5000))
 app.use(express.static('.'));
 
 app.get ('/cool', function(req, res){
@@ -60,8 +62,10 @@ app.get('/:input', function( req, res){
     //  "</P>");P
   });
 
-app.listen(port, function () {
-  console.log('Timeserver microapp listening on port ' + port);
+
+
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
 });
 
 
