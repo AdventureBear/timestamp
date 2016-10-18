@@ -2,6 +2,7 @@
 // node.js  v0.12.0
 var express = require('express');
 var app = express();
+var port = 5000;
 
 var moment = require('moment');
 moment().format();
@@ -53,7 +54,7 @@ app.get('/:input', function( req, res){
     //  "</P>");P
   });
 
-app.listen(8080, function () {
+app.listen(port, function () {
   console.log('Timeserver microapp listening on port 8080!');
 });
 
