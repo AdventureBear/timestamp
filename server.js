@@ -4,23 +4,25 @@ var app = express();
 var moment = require('moment');
 moment().format();
 
-app.get('/:input', function( req, res){
-  var input = req.params.input;
-  console.log("Input is: ", input);
-  //var m = Date.parse(input);
-  if (isNaN(input)) {
-    console.log("Input param is not a number:", isNaN(input));
-    var munix = (new Date(input).getTime())/1000;
-    console.log("Unix time (sec) from Date is: ", munix);
-    //if (m.isValid){
-      res.sendStatus(m);
-    //}
-  } else {
-    console.log("Input Param is not a number:", isNaN(input));
-    var m = moment.unix(toString(input))._d;
-    console.log("Date from Unix time is: ", m);
-      res.sendStatus(m);
+var returnObj = {};
 
+app.get('/:input', function( req, res){
+
+  var input = req.params.input;
+  var dateFromString = moment(input);
+  var validDateStr = dateFromString.isValid();
+
+  console.log("Input is: ", input);
+ 
+  console.log("Valid Date from string?", validDateStr);
+
+  //if it is an input containing natural language elements
+  //try converting to a date format & display
+    if (validDateStr) {
+      //returnObj = {'unix': dateFromString.unix(), 'date':dateFromString };
+      res.send(dateFromString);
+    } else {
+      res.send("Input cannot form a valid date");
     }
 
 
@@ -29,12 +31,9 @@ app.get('/:input', function( req, res){
 
 
   app.get("/",function(req,res){
-
-    res.end( "<h1>API Basejump: Timestamp microservice</h1>" +
+    res.end( "<h2>API Basejump: Timestamp microservice</h2>" +
       "<p>For more information visit this link <a href='https://timestamp-ms.herokuapp.com/'>link</a>" +
-      "</p>");
-
-
+      "</P>");
   });
 
 app.listen(8080, function () {
